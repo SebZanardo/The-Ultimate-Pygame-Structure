@@ -14,7 +14,7 @@ class Scene(ABC):
     def handle_input(self, input_buffer: InputBuffer) -> None: ...
 
     @abstractmethod
-    def update(self, dt: float) -> None: ...
+    def update(self, dt: float = 0.0) -> None: ...
 
     @abstractmethod
     def render(self, surface: pygame.Surface) -> None: ...
@@ -37,7 +37,7 @@ class SceneManager:
             return
         self.scene.handle_input(input_buffer)
 
-    def update(self, dt: float) -> None:
+    def update(self, dt: float = 0.0) -> None:
         if self.switched:
             return
         self.scene.update(dt)

@@ -2,9 +2,9 @@ import pygame
 
 from utilities.decorators import singleton
 from utilities.typehints import InputBuffer
-from config.settings import DISPLAY_SETUP, FPS, CAPTION, Key, KeyState
+from config.settings import DISPLAY_SETUP, FPS, CAPTION, Key, InputState, MouseButton
 from baseclasses.scenemanager import SceneManager
-from scenes.game import Game
+from scenes.mainmenu import MainMenu
 
 
 @singleton
@@ -17,8 +17,10 @@ class Core:
     pygame.display.set_icon(icon)
     pygame.display.set_caption(CAPTION)
 
+    last_mouse_pressed = (False, False, False)
+
     def __init__(self) -> None:
-        self.scene_manager = SceneManager(Game)
+        self.scene_manager = SceneManager(MainMenu)
 
     def run(self) -> None:
         while True:
@@ -51,16 +53,27 @@ class Core:
         keys_pressed = pygame.key.get_just_pressed()
         keys_held = pygame.key.get_pressed()
         keys_released = pygame.key.get_just_released()
-
-        input_buffer = {}
+        key_buffer = {}
         for key in Key:
-            input_buffer[key] = {
-                KeyState.PRESSED: keys_pressed[key.value],
-                KeyState.HELD: keys_held[key.value],
-                KeyState.RELEASED: keys_released[key.value],
+            key_buffer[key] = {
+                InputState.PRESSED: keys_pressed[key.value],
+                InputState.HELD: keys_held[key.value],
+                InputState.RELEASED: keys_released[key.value],
             }
 
-        return input_buffer
+        mouse_pressed = pygame.mouse.get_pressed()
+        mouse_buffer = {}
+        for button in MouseButton:
+            mouse_buffer[button] = {
+                InputState.PRESSED: mouse_pressed[button.value]
+                and not self.last_mouse_pressed[button.value],
+                InputState.HELD: mouse_pressed[button.value],
+                InputState.RELEASED: not mouse_pressed[button.value]
+                and self.last_mouse_pressed[button.value],
+            }
+        self.last_mouse_pressed = mouse_pressed
+
+        return key_buffer, mouse_buffer
 
     def check_for_quit(self) -> None:
         for event in pygame.event.get():

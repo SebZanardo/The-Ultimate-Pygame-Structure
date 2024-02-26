@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import pygame
 
 from utilities.decorators import singleton
-from utilities.typehints import InputBuffer
+from utilities.typehints import KeyBuffer, MouseBuffer, InputBuffer
 
 
 class Scene(ABC):
@@ -11,7 +11,9 @@ class Scene(ABC):
         self.scene_manager = scene_manager
 
     @abstractmethod
-    def handle_input(self, input_buffer: InputBuffer) -> None: ...
+    def handle_input(
+        self, key_buffer: KeyBuffer, mouse_buffer: MouseBuffer
+    ) -> None: ...
 
     @abstractmethod
     def update(self, dt: float = 0.0) -> None: ...
@@ -35,7 +37,7 @@ class SceneManager:
     def handle_input(self, input_buffer: InputBuffer) -> None:
         if self.switched:
             return
-        self.scene.handle_input(input_buffer)
+        self.scene.handle_input(*input_buffer)
 
     def update(self, dt: float = 0.0) -> None:
         if self.switched:

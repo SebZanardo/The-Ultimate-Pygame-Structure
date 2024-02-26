@@ -16,6 +16,12 @@ CAPTION = "My New Pygame Project"
 FPS = 60
 
 
+class MouseButton(Enum):
+    LEFT = 0
+    MIDDLE = 1
+    RIGHT = 2
+
+
 class Key(Enum):  # Input map based on NES Controller
     LEFT = pygame.K_LEFT
     RIGHT = pygame.K_RIGHT
@@ -27,7 +33,7 @@ class Key(Enum):  # Input map based on NES Controller
     START = pygame.K_RETURN
 
 
-class KeyState(Enum):
+class InputState(Enum):
     PRESSED = auto()
     HELD = auto()
     RELEASED = auto()

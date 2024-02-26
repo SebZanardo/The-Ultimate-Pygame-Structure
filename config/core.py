@@ -38,7 +38,7 @@ class Core:
     def get_delta_time(self, elapsed_time: int) -> float:
         delta = elapsed_time / 1000  # Convert to ms
 
-        if DISPLAY_SETUP['vsync']:
+        if DISPLAY_SETUP["vsync"]:
             delta_buffer = 0
             delta += delta_buffer
             last_dt = delta
@@ -57,7 +57,7 @@ class Core:
             input_buffer[key] = {
                 KeyState.PRESSED: keys_pressed[key.value],
                 KeyState.HELD: keys_held[key.value],
-                KeyState.RELEASED: keys_released[key.value]
+                KeyState.RELEASED: keys_released[key.value],
             }
 
         return input_buffer

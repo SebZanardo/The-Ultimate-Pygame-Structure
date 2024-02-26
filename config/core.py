@@ -25,7 +25,7 @@ class Core:
     def run(self) -> None:
         while True:
             elapsed_time = self.clock.tick(FPS)
-            dt = self.get_delta_time(elapsed_time)
+            dt = self.calculate_delta_time(elapsed_time)
 
             self.scene_manager.switched = False
             self.check_for_quit()
@@ -37,10 +37,10 @@ class Core:
 
             pygame.display.flip()
 
-    def get_delta_time(self, elapsed_time: int) -> float:
+    def calculate_delta_time(self, elapsed_time: int) -> float:
         delta = elapsed_time / 1000  # Convert to ms
 
-        if DISPLAY_SETUP["vsync"]:
+        if DISPLAY_SETUP["vsync"]:  # More accurate VSYNC deltatime
             delta_buffer = 0
             delta += delta_buffer
             last_dt = delta

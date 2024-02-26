@@ -1,8 +1,8 @@
 import pygame
 
 from utilities.typehints import InputBuffer
-from baseclasses.scenemanager import Scene, SceneManager
 from config.settings import Key, KeyState
+from baseclasses.scenemanager import Scene, SceneManager
 import scenes.game
 
 

@@ -2,16 +2,19 @@ from enum import Enum, auto
 import pygame
 
 # Nintendo DS Resolution
-DISPLAY_WIDTH = 256
-DISPLAY_HEIGHT = 192
-DISPLAY_CENTER = (DISPLAY_WIDTH // 2, DISPLAY_HEIGHT // 2)
-DISPLAY_SETUP = {
-    "size": (DISPLAY_WIDTH, DISPLAY_HEIGHT),
+WINDOW_WIDTH = 256
+WINDOW_HEIGHT = 192
+WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
+WINDOW_CENTER = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+
+WINDOW_SETUP = {
+    "size": WINDOW_SIZE,
     "flags": pygame.SCALED | pygame.RESIZABLE,
     "depth": 0,
     "display": 0,
     "vsync": 1,
 }
+
 CAPTION = "My New Pygame Project"
 FPS = 60
 

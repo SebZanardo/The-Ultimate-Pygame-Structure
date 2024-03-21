@@ -2,7 +2,7 @@ import pygame
 
 from utilities.decorators import singleton
 from utilities.typehints import InputBuffer
-from config.settings import DISPLAY_SETUP, FPS, CAPTION, Key, InputState, MouseButton
+from config.settings import WINDOW_SETUP, FPS, CAPTION, Key, InputState, MouseButton
 from baseclasses.scenemanager import SceneManager
 from scenes.mainmenu import MainMenu
 
@@ -10,7 +10,7 @@ from scenes.mainmenu import MainMenu
 @singleton
 class Core:
     pygame.init()
-    window = pygame.display.set_mode(**DISPLAY_SETUP)
+    window = pygame.display.set_mode(**WINDOW_SETUP)
     clock = pygame.time.Clock()
     icon = pygame.image.load("assets/icon.png")
 
@@ -40,7 +40,7 @@ class Core:
     def calculate_delta_time(self, elapsed_time: int) -> float:
         delta = elapsed_time / 1000  # Convert to ms
 
-        if DISPLAY_SETUP["vsync"]:  # More accurate VSYNC deltatime
+        if WINDOW_SETUP["vsync"]:  # More accurate VSYNC deltatime
             delta_buffer = 0
             delta += delta_buffer
             last_dt = delta
@@ -65,11 +65,11 @@ class Core:
         mouse_buffer = {}
         for button in MouseButton:
             mouse_buffer[button] = {
-                InputState.PRESSED: mouse_pressed[button.value]
-                and not self.last_mouse_pressed[button.value],
+                InputState.PRESSED: (mouse_pressed[button.value]
+                                     and not self.last_mouse_pressed[button.value]),
                 InputState.HELD: mouse_pressed[button.value],
-                InputState.RELEASED: not mouse_pressed[button.value]
-                and self.last_mouse_pressed[button.value],
+                InputState.RELEASED: (not mouse_pressed[button.value]
+                                      and self.last_mouse_pressed[button.value]),
             }
         self.last_mouse_pressed = mouse_pressed
 
@@ -79,6 +79,8 @@ class Core:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.terminate()
+
+            # For quick development
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.terminate()
 

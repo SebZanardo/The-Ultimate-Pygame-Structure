@@ -1,9 +1,8 @@
 from enum import Enum, auto
 import pygame
 
-# Nintendo DS Resolution
-WINDOW_WIDTH = 256
-WINDOW_HEIGHT = 192
+WINDOW_WIDTH = 640
+WINDOW_HEIGHT = 360
 WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
 WINDOW_CENTER = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
@@ -25,15 +24,27 @@ class MouseButton(Enum):
     RIGHT = 2
 
 
-class Key(Enum):  # Input map based on NES Controller
-    LEFT = pygame.K_LEFT
-    RIGHT = pygame.K_RIGHT
-    UP = pygame.K_UP
-    DOWN = pygame.K_DOWN
-    A = pygame.K_z
-    B = pygame.K_x
-    SELECT = pygame.K_RSHIFT
-    START = pygame.K_RETURN
+class Action(Enum):
+    LEFT = auto()
+    RIGHT = auto()
+    UP = auto()
+    DOWN = auto()
+    A = auto()
+    B = auto()
+    SELECT = auto()
+    START = auto()
+
+
+action_mappings = {
+    Action.LEFT: [pygame.K_a, pygame.K_LEFT],
+    Action.RIGHT: [pygame.K_d, pygame.K_RIGHT],
+    Action.UP: [pygame.K_w, pygame.K_UP],
+    Action.DOWN: [pygame.K_s, pygame.K_DOWN],
+    Action.A: [pygame.K_z, pygame.K_SLASH],
+    Action.B: [pygame.K_x, pygame.K_PERIOD],
+    Action.SELECT: [pygame.K_LSHIFT, pygame.K_RSHIFT],
+    Action.START: [pygame.K_RETURN, pygame.K_SPACE]
+}
 
 
 class InputState(Enum):

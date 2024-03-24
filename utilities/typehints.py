@@ -1,5 +1,5 @@
-from config.settings import Key, MouseButton, InputState
+from config.settings import Action, MouseButton, InputState
 
-KeyBuffer = dict[Key, dict[InputState, bool]]
+ActionBuffer = dict[Action, dict[InputState, bool]]
 MouseBuffer = dict[MouseButton, dict[InputState, bool]]
-InputBuffer = tuple[KeyBuffer, MouseBuffer]
+InputBuffer = tuple[ActionBuffer, MouseBuffer]

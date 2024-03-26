@@ -6,6 +6,7 @@ from baseclasses.scenemanager import SceneManager
 from config.settings import WINDOW_SETUP, FPS, CAPTION, action_mappings
 from config.input import InputState, MouseButton, Action
 from scenes.mainmenu import MainMenu
+from components.ui import debug_text
 
 
 @singleton
@@ -39,6 +40,10 @@ class Core:
             self.scene_manager.handle_input(input_buffer)
             self.scene_manager.update(dt)
             self.scene_manager.render(self.window)
+
+            # For easy performance testing
+            fps_text = debug_text(f"FPS {self.clock.get_fps():.0f}")
+            self.window.blit(fps_text, (0, 0))
 
             pygame.display.flip()
 

@@ -1,5 +1,5 @@
 # The Ultimate Pygame Structure  
-### This repository is a structure to help you organize and build your Pygame games efficiently.
+### This repository is a structure to help you organize and build your Pygame projects efficiently.
   
 ## Getting Started  
 Clone the repository to your local machine:
@@ -13,23 +13,18 @@ pip install -r requirements.txt
 ```
 
 ## Project Structure  
-**assets/**:  
-- Store all your game assets organised in subfolders here.  
+📂 **assets** : Store all your game assets organised in subfolders here.  
     
-**baseclasses/**:  
-- `scenemanager.py` Contains abstract _Scene_ class that needs to be inherited, and a _SceneManager_ class to run the scenes.
-- `statemachine.py` Contains abstract _State_ class that needs to be inherited, and a _StateMachine_ class to run the states.
+📂 **baseclasses** :  Define all your abstract base classes and their respective managers here.
 
-**config/**:
-- `core.py` Initialises Pygame and runs the game loop. Uses the SceneManager to run the current scene and its respective logic. Captures input keys and passes it along to the scene using an input buffer. Calculates delta time if your scenes need it.  
-- `settings.py` Stores all of the game constants.
+📂 **components** : Define all the components for your game here. Split them into separate files and folders if needed.
 
-**scenes/**:
-- Create all of your scenes here in separate files. Follow the layout specified by the _Scene_ baseclass.
+📂 **config** : Initialisation of the window, settings and keybinds are defined in here.
 
-**utilities/**:
-- A folder to hold helpful decorators, typehints and functions.  
+📂 **scenes** : Create all of your scenes here in separate files. Follow the layout specified by the _Scene_ baseclass.
 
+📂 **utilities** : Useful scripts such as decorators, typehints and helper functions.  
+  
 ## Running Your Game  
 Simply execute the `main.py` file to run your Pygame project:
 ```sh

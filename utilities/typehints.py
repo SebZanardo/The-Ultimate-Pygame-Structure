@@ -1,4 +1,4 @@
-from config.settings import Action, MouseButton, InputState
+from config.input import InputState, MouseButton, Action
 
 ActionBuffer = dict[Action, dict[InputState, bool]]
 MouseBuffer = dict[MouseButton, dict[InputState, bool]]

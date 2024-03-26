@@ -2,16 +2,9 @@ import pygame
 
 from utilities.decorators import singleton
 from utilities.typehints import InputBuffer
-from config.settings import (
-    WINDOW_SETUP,
-    FPS,
-    CAPTION,
-    Action,
-    action_mappings,
-    InputState,
-    MouseButton,
-)
 from baseclasses.scenemanager import SceneManager
+from config.settings import WINDOW_SETUP, FPS, CAPTION, action_mappings
+from config.input import InputState, MouseButton, Action
 from scenes.mainmenu import MainMenu
 
 

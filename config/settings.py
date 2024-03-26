@@ -1,5 +1,7 @@
-from enum import Enum, auto
 import pygame
+
+from config.input import Action
+
 
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 360
@@ -18,23 +20,6 @@ CAPTION = "My New Pygame Project"
 FPS = 60
 
 
-class MouseButton(Enum):
-    LEFT = 0
-    MIDDLE = 1
-    RIGHT = 2
-
-
-class Action(Enum):
-    LEFT = auto()
-    RIGHT = auto()
-    UP = auto()
-    DOWN = auto()
-    A = auto()
-    B = auto()
-    SELECT = auto()
-    START = auto()
-
-
 action_mappings = {
     Action.LEFT: [pygame.K_a, pygame.K_LEFT],
     Action.RIGHT: [pygame.K_d, pygame.K_RIGHT],
@@ -43,11 +28,5 @@ action_mappings = {
     Action.A: [pygame.K_z, pygame.K_SLASH],
     Action.B: [pygame.K_x, pygame.K_PERIOD],
     Action.SELECT: [pygame.K_LSHIFT, pygame.K_RSHIFT],
-    Action.START: [pygame.K_RETURN, pygame.K_SPACE]
+    Action.START: [pygame.K_RETURN, pygame.K_SPACE],
 }
-
-
-class InputState(Enum):
-    PRESSED = auto()
-    HELD = auto()
-    RELEASED = auto()

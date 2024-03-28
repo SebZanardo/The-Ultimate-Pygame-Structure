@@ -19,7 +19,7 @@ class MainMenu(Scene):
         ):
             self.scene_manager.switch_scene(scenes.game.Game)
 
-    def update(self, dt: float = 0.0) -> None:
+    def update(self, dt: float) -> None:
         pass
 
     def render(self, surface: pygame.Surface) -> None:

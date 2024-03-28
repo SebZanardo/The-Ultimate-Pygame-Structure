@@ -1,12 +1,8 @@
-import pygame
+import pygame.freetype
 
-pygame.font.init()
-font = pygame.font.Font("assets/joystix monospace.otf", 10)
+pygame.freetype.init()
 
-
-def debug_text(
-    string: str,
-    colour: pygame.Color = (255, 255, 255),
-    bgcolour: pygame.Color = (0, 0, 0),
-) -> pygame.Surface:
-    return font.render(string, False, colour, bgcolour)
+font = pygame.freetype.Font("assets/joystix monospace.otf", 10)
+font.antialiased = False
+font.fgcolor = (255, 255, 255)
+font.bgcolor = (0, 0, 0)

@@ -1,4 +1,5 @@
 import pygame
+import pygame.freetype
 
 from utilities.decorators import singleton
 from utilities.typehints import InputBuffer
@@ -6,7 +7,7 @@ from baseclasses.scenemanager import SceneManager
 from config.settings import WINDOW_SETUP, FPS, CAPTION, action_mappings
 from config.input import InputState, MouseButton, Action
 from scenes.mainmenu import MainMenu
-from components.ui import debug_text
+from components.ui import font
 
 
 @singleton
@@ -42,8 +43,7 @@ class Core:
             self.scene_manager.render(self.window)
 
             # For easy performance testing
-            fps_text = debug_text(f"FPS {self.clock.get_fps():.0f}")
-            self.window.blit(fps_text, (0, 0))
+            font.render_to(self.window, (0, 0), f"FPS {self.clock.get_fps():.0f}")
 
             pygame.display.flip()
 

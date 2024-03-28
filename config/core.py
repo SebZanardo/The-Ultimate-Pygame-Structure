@@ -44,11 +44,12 @@ class Core:
 
             # For easy performance testing
             font.render_to(self.window, (0, 0), f"FPS {self.clock.get_fps():.0f}")
+            font.render_to(self.window, (0, 10), f"DT {dt}")
 
             pygame.display.flip()
 
     def calculate_delta_time(self, elapsed_time: int) -> float:
-        return elapsed_time / 1000  # Convert to ms
+        return elapsed_time / 1000.0  # Convert to seconds
 
     def get_input(self) -> InputBuffer:
         keys_pressed = pygame.key.get_just_pressed()

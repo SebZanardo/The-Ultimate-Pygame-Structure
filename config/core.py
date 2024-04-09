@@ -1,47 +1,30 @@
 import asyncio  # For running the game in browser
-import sys
-import platform
 import pygame
 
 from utilities.decorators import singleton
 from utilities.typehints import InputBuffer
 from baseclasses.scenemanager import SceneManager
-from config.settings import WINDOW_SETUP, FPS, CAPTION, action_mappings
+from config.settings import FPS, action_mappings
 from config.input import InputState, MouseButton, Action
-from scenes.mainmenu import MainMenu
+from config.constants import WHITE, BLACK
+from config.assets import window, clock, DEBUG_FONT
+from scenes.mainmenu import MainMenu  # Initial scene
 
 
 @singleton
 class Core:
-    pygame.init()
-
-    if sys.platform == "emscripten":  # If running in browser
-        platform.window.canvas.style.imageRendering = "pixelated"
-        window = pygame.display.set_mode(WINDOW_SETUP["size"])
-    else:
-        window = pygame.display.set_mode(**WINDOW_SETUP)
-
-    clock = pygame.time.Clock()
-    icon = pygame.image.load("assets/icon.png")
-
-    pygame.display.set_icon(icon)
-    pygame.display.set_caption(CAPTION)
-
     last_mouse_pressed = (False, False, False)
     last_action_pressed = {action: False for action in Action}
     last_action_mapping_pressed = {
         action: action_mappings[action][0] for action in Action
     }
 
-    unfocused = False
-
     def __init__(self) -> None:
         self.scene_manager = SceneManager(MainMenu)
-        self.debug_font = pygame.font.Font("assets/joystix.ttf", 10)
 
     async def run(self) -> None:
         while True:
-            elapsed_time = self.clock.tick(FPS)
+            elapsed_time = clock.tick(FPS)
             dt = elapsed_time / 1000.0  # Convert to seconds
 
             self.scene_manager.switched = False
@@ -51,17 +34,15 @@ class Core:
 
             self.scene_manager.handle_input(input_buffer)
             self.scene_manager.update(dt)
-            self.scene_manager.render(self.window)
+            self.scene_manager.render(window)
 
             # For easy performance testing
-            fps_debug = self.debug_font.render(
-                f"FPS {self.clock.get_fps():.0f}", False, (255, 255, 255), (0, 0, 0)
+            fps_debug = DEBUG_FONT.render(
+                f"FPS {clock.get_fps():.0f}", False, WHITE, BLACK
             )
-            dt_debug = self.debug_font.render(
-                f"DT {dt}", False, (255, 255, 255), (0, 0, 0)
-            )
-            self.window.blit(fps_debug, (0, 0))
-            self.window.blit(dt_debug, (0, 10))
+            dt_debug = DEBUG_FONT.render(f"DT {dt}", False, WHITE, BLACK)
+            window.blit(fps_debug, (0, 0))
+            window.blit(dt_debug, (0, 10))
 
             pygame.display.flip()
             await asyncio.sleep(0)

@@ -3,6 +3,9 @@ import pygame
 from utilities.typehints import ActionBuffer, MouseBuffer
 from config.input import InputState, MouseButton, Action
 from baseclasses.scenemanager import Scene, SceneManager
+from config.constants import MAGENTA
+
+# Import the whole module of all scenes you want to switch to
 import scenes.game
 
 
@@ -23,4 +26,4 @@ class MainMenu(Scene):
         pass
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.fill((255, 0, 255))
+        surface.fill(MAGENTA)

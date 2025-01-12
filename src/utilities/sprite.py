@@ -20,6 +20,7 @@ def slice_sheet(
                     sprite_height,
                 )
             )
+
     return sprites
 
 
@@ -29,4 +30,5 @@ def get_sprite_from_sheet(
     sprite = pygame.Surface((width, height), pygame.SRCALPHA)
     sprite.blit(sprite_sheet, (0, 0), (x, y, width, height))
     sprite = sprite.convert_alpha()
+
     return sprite

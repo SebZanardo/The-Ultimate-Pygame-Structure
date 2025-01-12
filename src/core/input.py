@@ -1,23 +1,29 @@
 import pygame
+from enum import IntEnum, auto
 
-from config.input import Action
+
+class InputState(IntEnum):
+    NOTHING = 0
+    PRESSED = auto()
+    HELD = auto()
+    RELEASED = auto()
 
 
-WINDOW_WIDTH = 640
-WINDOW_HEIGHT = 360
-WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
-WINDOW_CENTRE = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+class MouseButton(IntEnum):
+    LEFT = 0
+    MIDDLE = 1
+    RIGHT = 2
 
-WINDOW_SETUP = {
-    "size": WINDOW_SIZE,
-    "flags": pygame.SCALED | pygame.RESIZABLE,
-    "depth": 0,
-    "display": 0,
-    "vsync": 1,
-}
 
-CAPTION = "My New Pygame Project"
-FPS = 60
+class Action(IntEnum):
+    LEFT = 0
+    RIGHT = auto()
+    UP = auto()
+    DOWN = auto()
+    A = auto()
+    B = auto()
+    SELECT = auto()
+    START = auto()
 
 
 action_mappings = {
@@ -30,3 +36,6 @@ action_mappings = {
     Action.SELECT: [pygame.K_LSHIFT, pygame.K_RSHIFT],
     Action.START: [pygame.K_RETURN, pygame.K_SPACE],
 }
+
+
+InputBuffer = list[InputState]

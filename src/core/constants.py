@@ -17,7 +17,7 @@ WINDOW_SETUP = {
 
 CAPTION = "My New Pygame Project"
 FPS = 0  # 0 = Uncapped -> let VSYNC decide best tick speed if enabled
-MAX_DT = 1/60
+MAX_DT = 1/FPS if FPS else 1/60
 
 # Colour constants
 WHITE = pygame.Color(255, 255, 255)

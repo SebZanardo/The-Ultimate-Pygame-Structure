@@ -50,7 +50,7 @@ async def game_loop(
 
         scene_manager.execute(surface, dt, action_buffer, mouse_buffer)
 
-        debug_str = f"FPS {clock.get_fps():.0f}\nDT {dt}"
+        debug_str = f"FPS {clock.get_fps():.0f}\nDT {dt:.3f}"
         debug_text = asset.DEBUG_FONT.render(
             debug_str, False, const.WHITE, const.BLACK)
         surface.blit(debug_text, (0, 0))

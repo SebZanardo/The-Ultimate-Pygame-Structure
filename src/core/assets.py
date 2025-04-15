@@ -9,7 +9,7 @@ DEBUG_SPRITE = pygame.image.load("assets/img/dvd_logo.png")
 DEBUG_FRAMES = slice_sheet("assets/img/impossible_spin.png", 64, 64)
 
 # Load audio (ogg for web compatibility)
-DEBUG_THEME = pygame.mixer.Sound("assets/sfx/theme.ogg")
+DEBUG_THEME = pygame.mixer.music.load("assets/sfx/theme.ogg")
 
 # Load fonts (ttf for web compatibility)
 DEBUG_FONT = pygame.font.Font("assets/joystix.ttf", 10)

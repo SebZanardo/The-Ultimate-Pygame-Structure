@@ -17,7 +17,7 @@ PIRATE = SimulatedObject(0, 0, 64, 64, 0, 0)
 
 class Game(Scene):
     def enter(self) -> None:
-        pygame.mixer.Channel(0).play(asset.DEBUG_THEME, -1)
+        pygame.mixer.music.play(-1)
 
     def execute(
         self,
@@ -51,4 +51,4 @@ class Game(Scene):
         surface.blit(asset.DEBUG_SPRITE, PIRATE.get_pos())
 
     def exit(self) -> None:
-        pygame.mixer.Channel(0).stop()
+        pygame.mixer.music.stop()
